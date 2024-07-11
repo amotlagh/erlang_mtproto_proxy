@@ -42,10 +42,7 @@ install: user $(LOGDIR)
 	mkdir -p $(prefix)/mtp_proxy/log/
 	chmod 777 $(prefix)/mtp_proxy/log/
 	install -D config/mtproto-proxy.service $(SERVICE)
-# If there is no "epmd" service, install one
-	if [ -z "`systemctl show -p FragmentPath epmd | cut -d = -f 2`" ]; then \
-	    install -D config/epmd.service $(EPMD_SERVICE); \
-	fi
+        install -D config/epmd.service $(EPMD_SERVICE)
 	systemctl daemon-reload
 
 .PHONY: update-sysconfig
